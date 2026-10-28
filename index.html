@@ -1,1 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://google.com" async defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"NoNickelAndDime"</title>
+    <style>
+        :root {
+            --bg-color: #111111;
+            --card-bg: #1a1a1a;
+            --accent-red: #ffffff;
+            --accent-green: #529A2C;
+            --text-main: #ffffff;
+            --text-muted: #aaaaaa;
+            --border-color: #333333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(17, 17, 17, 0.95);
+        }
+
+        .nav-logo {
+            font-size: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .nav-counter {
+            font-size: 14px;
+            background: var(--card-bg);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px 5px;
+            text-align: center;
+        }
+
+        .banner-container {
+            background-color: #0a0a0a;
+            padding: 10px 40px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .banner-text {
+            color: var(--accent-red);
+            font-size: 10px;
+            font-weight: 600;
+            line-height: 1.8;
+            margin: 0;
+            color: ffffff
+0.5s ease;
+        }
+
+        .banner-text.active-green {
+            color: var(--accent-green);
+        }
+
+        .company-keyword {
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .tracker-section {
+            margin: 40px 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #222222;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-bar {
+            width: 0%;
+            background-color: var(--accent-red);
+            height: 100%;
+            transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1), background-color 0.5s ease;
+        }
+
+        .progress-bar.active-green {
+            background-color: var(--accent-green);
+        }
+
+        .tracker-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .pledge-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: left;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .form-group input[type="checkbox"] {
+            margin-top: 4px;
+            margin-right: 15px;
+            transform: scale(1.3);
+            accent-color: var(--accent-green);
+            cursor: pointer;
+        }
+
+        .form-group label {
+            font-size: 15px;
+            color: var(--text-muted);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .strike-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--accent-red);
+            color: var(--text-main);
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, opacity 0.2s ease;
+        }
+
+        .strike-btn:disabled {
+            background-color: #333333;
+            color: #777777;
+            cursor: not-allowed;
+        }
+
+        .strike-btn.active-green:not(:disabled) {
+            background-color: var(--accent-green);
+            color: #000000;
+        }
+
+        .footer {
+            margin-top: 80px;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 12px;
+            color: #555555;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">NoNickelAndDime</div>
+        <div class="nav-counter">Live Pledges: <strong id="nav-count-val">0</strong></div>
+    </nav>
+
+    <div class="container">
+        <div class="banner-container">
+            <p class="banner-text" id="banner-text-id">
+                If Netflix will nickel and dime us, we don't pull out our wallets. We cancel our subscription until they do what's right.
+            </p>
+        </div>
+
+        <div class="tracker-section">
+            <h3 style="margin: 0 0 5px 0;">Current Campaign Momentum</h3>
+            <div style="font-size: 42px; font-weight: 800;" id="main-counter">0</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-fill"></div>
+            </div>
+            <div class="tracker-stats">
+                <span>Target: 15,000,000 Verified Commitments</span>
+                <span id="percent-label">0.00% Secured</span>
+            </div>
+        </div>
+
+        <div class="pledge-card">
+            <div class="form-group">
+                <input type="checkbox" id="pledge-check" onchange="handlePledgeCheckboxChange()">
+                <label for="pledge-check">
+                    I hereby promise to manually cancel my Netflix subscription when the pledge counter reaches the goal of 15,000,000 pledges.
+                </label>
+            </div>
+            <button class="strike-btn" id="submit-strike-btn" disabled onclick="handleStrikeSubmission()">JOIN THE STRIKE</button>
+        </div>
+
+        <footer class="footer">
+            Nominative Fair Use Disclaimer: The term "Netflix" is used purely for descriptive purposes to identify the platform targeted by this consumer assembly campaign. This platform is completely independent and has zero affiliation, endorsement, authorization, or partnership with Netflix, Inc. This site operates with zero code injection or background automation. Built entirely on voluntary consumer interaction in compliance with California Anti-SLAPP frameworks.
+        </footer>
+    </div>
+
+    <!-- The JavaScript engine is baked right in here for local app testing -->
+    <script>
+        let currentStrikeCount = 0;
+        const ultimateStrikeTarget = 15000000;
+
+        function displayRefreshedCounter() {
+            const formattedCount = currentStrikeCount.toLocaleString();
+            
+            document.getElementById('main-counter').innerText = formattedCount;
+            document.getElementById('nav-count-val').innerText = formattedCount;
+            
+            const percentageComplete = (currentStrikeCount / ultimateStrikeTarget) * 100;
+            document.getElementById('progress-fill').style.width = percentageComplete + "%";
+            document.getElementById('percent-label').innerText = percentageComplete.toFixed(2) + "% Secured";
+        }
+
+        function handlePledgeCheckboxChange() {
+            const checkBox = document.getElementById('pledge-check');
+            const isChecked = checkBox.checked;
+            const actionButton = document.getElementById('submit-strike-btn');
+            const bannerText = document.getElementById('banner-text-id');
+            const progressBar = document.getElementById('progress-fill');
+            
+            actionButton.disabled = !isChecked;
+
+            if (isChecked) {
+                bannerText.classList.add('active-green');
+                progressBar.classList.add('active-green');
+                actionButton.classList.add('active-green');
+            } else {
+                bannerText.classList.remove('active-green');
+                progressBar.classList.remove('active-green');
+                actionButton.classList.remove('active-green');
+            }
+        }
+
+        function handleStrikeSubmission() {
+            const userEmail = prompt("Verify your unique email to secure your strike slot:");
+            if (!userEmail) return;
+
+            // This local simulator bypasses the web pipeline so it functions inside Koder
+            currentStrikeCount += 1;
+            displayRefreshedCounter();
+
+            alert("Voluntary pledge recorded securely (Local Simulator).");
+            document.getElementById('pledge-check').disabled = true;
+            document.getElementById('submit-strike-btn').disabled = true;
+        }
+
+        // Initialize immediately when Koder loads the preview screen
+        window.addEventListener('DOMContentLoaded', displayRefreshedCounter);
+    </script>
+</body>
+</html>
+    <!-- Bulletproof Koder App Logic Engine -->
+    <script>
+        // Use a baseline variable that forces an immediate draw
+        var currentStrikeCount = 0;
+        var ultimateStrikeTarget = 15000000;
+
+        // Force a raw HTML injection function to completely bypass browser rendering lag
+        function forceRender() {
+            var formatted = currentStrikeCount.toLocaleString();
+            document.getElementById('main-counter').innerHTML = formatted;
+            document.getElementById('nav-count-val').innerHTML = formatted;
+            
+            var pct = (currentStrikeCount / ultimateStrikeTarget) * 100;
+            document.getElementById('progress-fill').style.width = pct + "%";
+            document.getElementById('percent-label').innerHTML = pct.toFixed(2) + "% Secured";
+        }
+
+        function handlePledgeCheckboxChange() {
+            var checkBox = document.getElementById('pledge-check');
+            var actionButton = document.getElementById('submit-strike-btn');
+            var bannerText = document.getElementById('banner-text-id');
+            var progressBar = document.getElementById('progress-fill');
+            
+            actionButton.disabled = !checkBox.checked;
+
+            if (checkBox.checked) {
+                // INSTANT TRIGGER: Force the count to 1 the exact millisecond they check the box
+                currentStrikeCount = 1;
+                forceRender();
+
+                bannerText.classList.add('active-green');
+                progressBar.classList.add('active-green');
+                actionButton.classList.add('active-green');
+            } else {
+                // REVERT TRIGGER: Force the count back to 0 if they uncheck it
+                currentStrikeCount = 0;
+                forceRender();
+
+                bannerText.classList.remove('active-green');
+                progressBar.classList.remove('active-green');
+                actionButton.classList.remove('active-green');
+            }
+        }
+
+        function handleStrikeSubmission() {
+            // Completely bypass prompts/alerts that crash mobile previews
+            // Instantly transition button to a complete success state
+            var actionButton = document.getElementById('submit-strike-btn');
+            actionButton.innerHTML = "PLEDGE SECURED";
+            actionButton.style.opacity = "0.5";
+            document.getElementById('pledge-check').disabled = true;
+            actionButton.disabled = true;
+        }
+
+        // Initialize immediately using inline script firing
+        forceRender();
+    </script>
 
